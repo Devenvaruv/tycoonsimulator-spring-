@@ -74,7 +74,7 @@
             	<version>2.4.4</version>
             	<configuration>
                 	<version>1</version>
-                	<projectId>nth-guide-404519</projectId>
+                	<projectId>tycoonsimulator</projectId>
             	</configuration>
         </plugin>
 		</plugins>
