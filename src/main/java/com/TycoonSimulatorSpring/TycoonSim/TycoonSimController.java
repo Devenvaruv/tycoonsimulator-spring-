@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.TycoonSimulatorSpring.TycoonSim;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
