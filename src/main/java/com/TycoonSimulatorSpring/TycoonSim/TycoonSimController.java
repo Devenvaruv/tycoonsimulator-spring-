@@ -13,51 +13,51 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpSession;
 
 @RestController
-public class BookController {
-  private final BookRepository bookRepository;
+public class TycoonSimController {
+  private final TycoonSimRepository TycoonSimRepository;
 
-  public BookController(BookRepository bookRepository) {
-    this.bookRepository = bookRepository;
+  public TycoonSimController(TycoonSimRepository TycoonSimRepository) {
+    this.TycoonSimRepository = TycoonSimRepository;
   }
 
-  @PostMapping("/saveBook")
+  @PostMapping("/saveTycoonSim")
   @CrossOrigin(origins = "*")
-  public String saveBook(@RequestBody Book book) {
-    if (book == null) {
-      return "The book is invalid";
+  public String saveTycoonSim(@RequestBody TycoonSim TycoonSim) {
+    if (TycoonSim == null) {
+      return "The TycoonSim is invalid";
     }
-    this.bookRepository.save(book);
+    this.TycoonSimRepository.save(TycoonSim);
     return "success";
   }
 
 
 
-  @GetMapping("/findAllBooks")
+  @GetMapping("/findAllTycoonSims")
   @ResponseBody
   @CrossOrigin(origins = "*")
-  public List<Book> findAllBooks() {
-  	Iterable<Book> books = this.bookRepository.findAll();
-    List<Book> bookList = new ArrayList<>();
-    books.forEach(bookList::add);
-    return bookList;
+  public List<TycoonSim> findAllTycoonSims() {
+  	Iterable<TycoonSim> TycoonSims = this.TycoonSimRepository.findAll();
+    List<TycoonSim> TycoonSimList = new ArrayList<>();
+    TycoonSims.forEach(TycoonSimList::add);
+    return TycoonSimList;
   }
 
   @GetMapping("/findByAuthor")
   @ResponseBody
   @CrossOrigin(origins = "*")
-  public List<Book> findByAuthor(@RequestParam String author) {
-    Iterable<Book> books = this.bookRepository.findByAuthor(author);
-    List<Book> bookList = new ArrayList<>();
-    books.forEach(bookList::add);
-    return bookList;
+  public List<TycoonSim> findByAuthor(@RequestParam String author) {
+    Iterable<TycoonSim> TycoonSims = this.TycoonSimRepository.findByAuthor(author);
+    List<TycoonSim> TycoonSimList = new ArrayList<>();
+    TycoonSims.forEach(TycoonSimList::add);
+    return TycoonSimList;
   }
   @GetMapping("/findByUserId")
   @ResponseBody
   @CrossOrigin(origins = "*")
-  public List<Book> findByUserId(@RequestParam String userId) {
-    Iterable<Book> books = this.bookRepository.findByUserId(userId);
-    List<Book> bookList = new ArrayList<>();
-    books.forEach(bookList::add);
-    return bookList;
+  public List<TycoonSim> findByUserId(@RequestParam String userId) {
+    Iterable<TycoonSim> TycoonSims = this.TycoonSimRepository.findByUserId(userId);
+    List<TycoonSim> TycoonSimList = new ArrayList<>();
+    TycoonSims.forEach(TycoonSimList::add);
+    return TycoonSimList;
   }
 }
