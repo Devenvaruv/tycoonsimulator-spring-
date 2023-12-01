@@ -51,7 +51,7 @@ public class TycoonSimController {
     TycoonSims.forEach(TycoonSimList::add);
     return TycoonSimList;
   }
-  @GetMapping("/findByUserId")
+  @GetMapping("/findByUserId ")
   @ResponseBody
   @CrossOrigin(origins = "*")
   public List<TycoonSim> findByUserId(@RequestParam String userId) {
