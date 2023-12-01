@@ -1,64 +1,58 @@
 package com.TycoonSimulatorSpring.TycoonSim;
 
-import com.google.cloud.spring.data.datastore.core.mapping.Entity;
-import org.springframework.data.annotation.Id;
+import java.util.List;
 
+import com.google.common.collect.Lists;
 import java.util.Date;
 
-@Entity(name = "Tycoon")
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.shell.standard.ShellComponent;
+import org.springframework.shell.standard.ShellMethod;
+
+@ShellComponent
+@SpringBootApplication
 public class TycoonSimApplication {
-	@Id
-	private Long id;
+	@Autowired
+	TycoonSimRepository tycoonSimRepository;
 
-	private String name;
-	private Date date;
-	private int score;
-
-	public TycoonSimApplication(String name, Date date, int score) {
-		this.name = name;
-		this.date = date;
-		this.score = score;
+	public static void main(String[] args) {
+		SpringApplication.run(TycoonSimApplication.class, args);
 	}
 
-	public Long getId() {
-		return id;
+	@ShellMethod("Saves a Sim to Cloud Datastore: save-Sim <name> <date> <score>")
+	public String saveSim(String name, Date date, int score) {
+		TycoonSim savedSim = this.tycoonSimRepository.save(new TycoonSim(name, date, score));
+		return savedSim.toString();
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	@ShellMethod("Loads all sims")
+	public String findAllSims() {
+		Iterable<TycoonSim> sims = this.tycoonSimRepository.findAll();
+		return Lists.newArrayList(sims).toString();
 	}
 
-	public String getName() {
-		return name;
+	@ShellMethod("Loads sims by name: find-by-name <name>")
+	public String findByName(String name) {
+		List<TycoonSim> sims = this.tycoonSimRepository.findByName(name);
+		return sims.toString();
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	@ShellMethod("Loads sims published by a score: find-by-score <score>")
+	public String findByScore(int score) {
+		List<TycoonSim> sims = this.tycoonSimRepository.findByScore(score);
+		return sims.toString();
 	}
 
-	public Date getDate() {
-		return date;
+	@ShellMethod("Loads books by author and year: find-by-author-year <author> <year>")
+	public String findByHighScore() {
+		List<TycoonSim> sims = this.tycoonSimRepository.findByHighScore();
+		return sims.toString();
 	}
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-	public int getScore() {
-		return score;
-	}
-
-	public void setScore(int score) {
-		this.score = score;
-	}
-
-	@Override
-	public String toString() {
-		return "Game{" +
-				"id=" + id +
-				", name='" + name + '\'' +
-				", date=" + date +
-				", score=" + score +
-				'}';
+	@ShellMethod("Removes all sims")
+	public void removeAllSims() {
+		this.tycoonSimRepository.deleteAll();
 	}
 }

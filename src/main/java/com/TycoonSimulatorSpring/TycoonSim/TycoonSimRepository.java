@@ -5,12 +5,12 @@ import java.util.List;
 import com.google.cloud.spring.data.datastore.repository.DatastoreRepository;
 
 
-public interface TycoonSimRepository extends DatastoreRepository<TycoonSimApplication, Long> {
+public interface TycoonSimRepository extends DatastoreRepository<TycoonSim, Long> {
 
-    List<TycoonSimApplication> findByName(String name);
+    List<TycoonSim> findByName(String name);
 
-    List<TycoonSimApplication> findByScore(int score);
+    List<TycoonSim> findByScore(int score);
 
-    List<TycoonSimApplication> findByHighScore();
+    List<TycoonSim> findByHighScore();
 
 }

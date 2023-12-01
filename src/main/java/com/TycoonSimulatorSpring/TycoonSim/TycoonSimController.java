@@ -42,20 +42,11 @@ public class TycoonSimController {
     return TycoonSimList;
   }
 
-  @GetMapping("/findByAuthor")
+  @GetMapping("/findByName")
   @ResponseBody
   @CrossOrigin(origins = "*")
-  public List<TycoonSim> findByAuthor(@RequestParam String author) {
-    Iterable<TycoonSim> TycoonSims = this.TycoonSimRepository.findByAuthor(author);
-    List<TycoonSim> TycoonSimList = new ArrayList<>();
-    TycoonSims.forEach(TycoonSimList::add);
-    return TycoonSimList;
-  }
-  @GetMapping("/findByUserId ")
-  @ResponseBody
-  @CrossOrigin(origins = "*")
-  public List<TycoonSim> findByUserId(@RequestParam String userId) {
-    Iterable<TycoonSim> TycoonSims = this.TycoonSimRepository.findByUserId(userId);
+  public List<TycoonSim> findByAuthor(@RequestParam String name) {
+    Iterable<TycoonSim> TycoonSims = this.TycoonSimRepository.findByName(name);
     List<TycoonSim> TycoonSimList = new ArrayList<>();
     TycoonSims.forEach(TycoonSimList::add);
     return TycoonSimList;
